@@ -18,5 +18,6 @@ void initArray(int* usrIns, char*** canvas);
 void printCanvas(int* usrIns, char** canvas);
 void clearCanvas(int* usrIns, char** canvas);
 char** createCanvas(int* usrIns);
+void placePlayer(int coords[], char** canvas);
 
 #endif

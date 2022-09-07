@@ -18,7 +18,7 @@ toolbox.o : toolbox.c toolbox.h
 verify.o : verify.c verify.h gameplay.h
 	$(CC) -c verify.c $(CFLAGS)
 
-gameplay.o : gameplay.c gameplay.h verify.h terminal.h
+gameplay.o : gameplay.c gameplay.h verify.h terminal.h canvas.h
 	$(CC) -c gameplay.c $(CFLAGS)
 
 terminal.o : terminal.c terminal.h

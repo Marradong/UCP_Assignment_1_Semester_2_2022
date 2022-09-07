@@ -5,13 +5,18 @@
 
 void initArray(int* usrIns, char*** canvas)
 {
+    int playerCoords[2];
+    playerCoords[0] = usrIns[PLAYER_ROW];
+    playerCoords[1] = usrIns[PLAYER_COL];
     *canvas = createCanvas(usrIns);
-    clearCanvas(usrIns, *canvas);
-
-    (*canvas)[usrIns[PLAYER_ROW] + 1][usrIns[PLAYER_COL] + 1] = PLAYER_SYM;
-    (*canvas)[usrIns[GOAL_ROW] + 1][usrIns[GOAL_COL] + 1] = GOAL_SYM;
+    clearCanvas(usrIns, *canvas);   
+    placePlayer(playerCoords, *canvas);
 }
 
+void placePlayer(int coords[], char** canvas)
+{
+    canvas[coords[0] + 1][coords[1] + 1] = PLAYER_SYM;
+}
 
 void clearCanvas(int* usrIns, char** canvas)
 {
@@ -33,6 +38,8 @@ void clearCanvas(int* usrIns, char** canvas)
             memset(canvas[i] + cols - 1, BORDER_SYM, 1);
         }
     }
+
+    canvas[usrIns[GOAL_ROW] + 1][usrIns[GOAL_COL] + 1] = GOAL_SYM;
 }
 
 char** createCanvas(int* usrIns)

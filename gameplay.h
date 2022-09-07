@@ -7,5 +7,6 @@
 #define RIGHT_KEY 'd'
 
 char readMove(void);
+void movePlayer(char** canvas, char* usrKey, int playerCoords[], int usrIns[]);
 
 #endif

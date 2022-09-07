@@ -5,7 +5,7 @@
 
 int vStartLocation(int usrIns[]);
 int vArgs(int numArgs);
-int vMapSize(int mapSize[]);
+int vMapSize(int usrIns[]);
 int vMove(char* move);
 
 #endif
