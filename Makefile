@@ -1,12 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -pedantic -ansi
-OBJ = main.o canvas.o toolbox.o
+OBJ = main.o canvas.o toolbox.o verify.o
 EXEC = escape
 
 $(EXEC) : $(OBJ)
 	$(CC) $(OBJ) -o $(EXEC)
 
-main.o : main.c canvas.h
+main.o : main.c canvas.h toolbox.h verify.h
 	$(CC) -c main.c $(CFLAGS)
 
 canvas.o : canvas.c canvas.h
@@ -14,6 +14,9 @@ canvas.o : canvas.c canvas.h
 
 toolbox.o : toolbox.c toolbox.h
 	$(CC) -c toolbox.c $(CFLAGS)
+
+verify.o : verify.c verify.h
+	$(CC) -c verify.c $(CFLAGS)
 
 clean :
 	rm -f $(EXEC) $(OBJ)
@@ -34,4 +37,5 @@ clean :
 # make main.o <- build the target "main.o" 
 # make canvas.o <- build the target "canvas.o"
 # make toolbox.o <- build the target "toolbox.o"
+# make verify.o <- build the target "verify.o"
 # make clean <- build the target "clean"
