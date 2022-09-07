@@ -29,15 +29,37 @@ int vArgs(int numArgs)
     return verified;
 }
 
-int vStartLocation(int coordx, int coordy, int max)
+int vStartLocation(int coordX, int coordY, int maxX, int maxY)
 {
     int verified = 1;
-    if((coordx > max) || (coordx < 0))
+    if((coordX > maxX) || (coordX < 0) || (coordY > maxY) || (coordY < 0))
     {
         verified = 0;
         system("clear");
         printf("Invalid Location! Please ensure parameters are within the map\n");
         /* TODO : End Program */
+    }
+    return verified;
+}
+
+int vMove(char* move)
+{
+    int verified = 0;
+    if((*move) == 'w')
+    {
+        verified = 1;
+    }
+    else if((*move) == 's')
+    {
+        verified = 1;
+    }
+    else if((*move) == 'a')
+    {
+        verified = 1;
+    }
+    else if((*move) == 'd')
+    {
+        verified = 1;
     }
     return verified;
 }
