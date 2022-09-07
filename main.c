@@ -3,6 +3,7 @@
 #include "canvas.h"
 #include "toolbox.h"
 #include "verify.h"
+#include "gameplay.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
     {
         initArray(userInputs, &canvas);
         printCanvas(userInputs, canvas);
-        
+        readMove();
         free(canvas);
     }        
     return 0;

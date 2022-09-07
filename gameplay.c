@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include "gameplay.h"
 #include "terminal.h"
+#include "verify.h"
 
-char readMove()
+char readMove(void)
 {
     char move;
     disableBuffer();
-    scanf(" %c", &move);
-    if(vMove(&move))
-    {
 
+    while(!vMove(&move))
+    {
+        scanf(" %c", &move);
     }  
+    
+    enableBuffer();
     return move;
 }
