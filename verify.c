@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "verify.h"
+#include "gameplay.h"
+#include "canvas.h"
 
-int vMapSize(int row, int col)
+int vMapSize(int usrIns[])
 {
     int verified = 1;
     /* Check within bounds else end program */
-    if((row <= MAP_MINIMUM) || (col <= MAP_MINIMUM))
+    if((usrIns[ROWS] <= MAP_MINIMUM) || (usrIns[COLS] <= MAP_MINIMUM))
     {
         verified = 0;
         system("clear");
@@ -29,10 +31,18 @@ int vArgs(int numArgs)
     return verified;
 }
 
-int vStartLocation(int coordX, int coordY, int maxX, int maxY)
+int vStartLocation(int usrIns[])
 {
     int verified = 1;
-    if((coordX > maxX) || (coordX < 0) || (coordY > maxY) || (coordY < 0))
+
+    int playerChecks = (usrIns[PLAYER_ROW] > usrIns[ROWS]) || (usrIns[PLAYER_ROW] < 0) 
+        || (usrIns[PLAYER_COL] > usrIns[COLS]) || (usrIns[PLAYER_COL] < 0 
+        || (usrIns[PLAYER_ROW] != usrIns[GOAL_ROW] && usrIns[PLAYER_COL] != usrIns[GOAL_COL]));
+
+    int goalChecks = (usrIns[GOAL_ROW] > usrIns[ROWS]) || (usrIns[GOAL_ROW] < 0) 
+        || (usrIns[GOAL_ROW] > usrIns[COLS]) || (usrIns[GOAL_ROW] < 0);
+
+    if(playerChecks || goalChecks)
     {
         verified = 0;
         system("clear");
@@ -45,19 +55,7 @@ int vStartLocation(int coordX, int coordY, int maxX, int maxY)
 int vMove(char* move)
 {
     int verified = 0;
-    if((*move) == 'w')
-    {
-        verified = 1;
-    }
-    else if((*move) == 's')
-    {
-        verified = 1;
-    }
-    else if((*move) == 'a')
-    {
-        verified = 1;
-    }
-    else if((*move) == 'd')
+    if((*move) == UP_KEY || (*move) == DOWN_KEY || (*move) == LEFT_KEY || (*move) == RIGHT_KEY)
     {
         verified = 1;
     }

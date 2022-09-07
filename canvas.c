@@ -3,21 +3,21 @@
 #include <string.h>
 #include "canvas.h"
 
-void initArray(int* userInputs, char*** canvas)
+void initArray(int* usrIns, char*** canvas)
 {
-    *canvas = createCanvas(userInputs);
-    clearCanvas(userInputs, *canvas);
+    *canvas = createCanvas(usrIns);
+    clearCanvas(usrIns, *canvas);
 
-    (*canvas)[userInputs[PLAYER_ROW_INDEX] + 1][userInputs[PLAYER_COL_INDEX] + 1] = PLAYER_SYM;
-    (*canvas)[userInputs[GOAL_ROW_INDEX] + 1][userInputs[GOAL_COL_INDEX] + 1] = GOAL_SYM;
+    (*canvas)[usrIns[PLAYER_ROW] + 1][usrIns[PLAYER_COL] + 1] = PLAYER_SYM;
+    (*canvas)[usrIns[GOAL_ROW] + 1][usrIns[GOAL_COL] + 1] = GOAL_SYM;
 }
 
 
-void clearCanvas(int* userInputs, char** canvas)
+void clearCanvas(int* usrIns, char** canvas)
 {
     int i;
-    int rows = userInputs[ROWS_INDEX] + 2;
-    int cols = userInputs[COLS_INDEX] + 2;
+    int rows = usrIns[ROWS] + 2;
+    int cols = usrIns[COLS] + 2;
 
     for (i=0;i<rows;i++)
     {
@@ -35,11 +35,11 @@ void clearCanvas(int* userInputs, char** canvas)
     }
 }
 
-char** createCanvas(int* userInputs)
+char** createCanvas(int* usrIns)
 {
     int i;
-    int rows = userInputs[ROWS_INDEX] + 2;
-    int cols = userInputs[COLS_INDEX] + 2;
+    int rows = usrIns[ROWS] + 2;
+    int cols = usrIns[COLS] + 2;
     
     char** canvas = (char**)malloc(rows * sizeof(char*));
 
@@ -50,10 +50,10 @@ char** createCanvas(int* userInputs)
     return canvas;
 }
 
-void printCanvas(int* userInputs, char** canvas)
+void printCanvas(int* usrIns, char** canvas)
 {
-    int rows = userInputs[ROWS_INDEX] + 2;
-    int cols = userInputs[COLS_INDEX] + 2;
+    int rows = usrIns[ROWS] + 2;
+    int cols = usrIns[COLS] + 2;
     int i, j;
 
     system("clear");

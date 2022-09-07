@@ -3,9 +3,9 @@
 
 #define MAP_MINIMUM 5
 
-int vStartLocation(int coordX, int coordY, int maxX, int maxY);
+int vStartLocation(int usrIns[]);
 int vArgs(int numArgs);
-int vMapSize(int row, int col);
+int vMapSize(int mapSize[]);
 int vMove(char* move);
 
 #endif

@@ -12,7 +12,28 @@ char readMove(void)
     {
         scanf(" %c", &move);
     }  
-    
+
     enableBuffer();
     return move;
+}
+
+void movePlayer(char** canvas, char* usrKey, int playerCoords[])
+{
+
+    if((*usrKey) == UP_KEY)
+    {
+
+    }
+    else if((*usrKey) == DOWN_KEY)
+    {
+
+    }
+    else if((*usrKey) == LEFT_KEY)
+    {
+
+    }
+    else if((*usrKey) == RIGHT_KEY)
+    {
+
+    }
 }
