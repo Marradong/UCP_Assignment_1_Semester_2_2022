@@ -30,7 +30,15 @@ int main(int argc, char *argv[])
             while (!(winStatus || loseStatus))
             {
                 usrKey = readMove();
-                movePlayer(canvas, &usrKey, playerCoords, usrIns);
+
+                #ifndef BORDERLESS
+                    movePlayer(canvas, &usrKey, playerCoords, usrIns);
+                #endif
+
+                #ifdef BORDERLESS
+                    moveBorderless(canvas, &usrKey, playerCoords, usrIns);
+                #endif
+
                 winStatus = vWin(usrIns, playerCoords);
                 loseStatus = (vLose(canvas, playerCoords) || vLose(canvas, goalCoords));
             }
