@@ -15,10 +15,10 @@ canvas.o : canvas.c canvas.h
 toolbox.o : toolbox.c toolbox.h
 	$(CC) -c toolbox.c $(CFLAGS)
 
-verify.o : verify.c verify.h gameplay.h
+verify.o : verify.c verify.h gameplay.h canvas.h toolbox.h
 	$(CC) -c verify.c $(CFLAGS)
 
-gameplay.o : gameplay.c gameplay.h verify.h terminal.h canvas.h
+gameplay.o : gameplay.c gameplay.h terminal.h verify.h canvas.h random.h toolbox.h
 	$(CC) -c gameplay.c $(CFLAGS)
 
 terminal.o : terminal.c terminal.h

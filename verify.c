@@ -3,6 +3,7 @@
 #include "verify.h"
 #include "gameplay.h"
 #include "canvas.h"
+#include "toolbox.h"
 
 int vMapSize(int* usrIns)
 {
@@ -17,6 +18,17 @@ int vMapSize(int* usrIns)
         /* TODO : End Program */
     }
     return verified;
+}
+
+int vLose(char** canvas, int* coords)
+{
+    int lose = 0;
+    if((canvas[coords[0]][coords[1]] == FLOOR_SYM) && (canvas[coords[0] + 1][coords[1]] == FLOOR_SYM)
+        && (canvas[coords[0]][coords[1]] == FLOOR_SYM) && (canvas[coords[0]][coords[1] + 1] == FLOOR_SYM))
+    {
+        lose = 1;
+    }
+    return lose;
 }
 
 int vWin(int* usrIns, int* playerCoords)
@@ -42,7 +54,7 @@ int vArgs(int* numArgs)
     return verified;
 }
 
-int vFloor(int* usrIns, int* playerCoords, char** canvas)
+int vFloor(int* usrIns, int* coords, char** canvas, int checkGoal)
 {
     int i, j;
     int verified = 1;
@@ -50,12 +62,19 @@ int vFloor(int* usrIns, int* playerCoords, char** canvas)
     {
         for(j=0;j<usrIns[COLS];j++)
         {
-            if(canvas[i][j] == FLOOR_SYM && i == playerCoords[0] && j == playerCoords[1])
+            if(canvas[i][j] == FLOOR_SYM && (i-1) == coords[0] && (j-1) == coords[1])
+            {
+                verified = 0;
+            }
+            
+            if(checkGoal && (canvas[i][j] == GOAL_SYM || canvas[i][j] == PLAYER_SYM) 
+                && (i-1) == coords[0] && (j-1) == coords[1])
             {
                 verified = 0;
             }
         }
     }
+    return verified;
 }
 
 int vStartLocation(int* usrIns)

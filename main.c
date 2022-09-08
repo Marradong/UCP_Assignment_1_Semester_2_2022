@@ -8,8 +8,9 @@
 
 int main(int argc, char *argv[])
 {
-    int usrIns[6], playerCoords[2];
+    int usrIns[6], playerCoords[2], goalCoords[2];
     int winStatus = 0;
+    int loseStatus = 0;
     char **canvas;
     char usrKey;
 
@@ -18,19 +19,29 @@ int main(int argc, char *argv[])
         charToInt(argv, usrIns, &argc);
         playerCoords[0] = usrIns[PLAYER_ROW];
         playerCoords[1] = usrIns[PLAYER_COL];
+        goalCoords[0] = usrIns[GOAL_ROW];
+        goalCoords[1] = usrIns[GOAL_COL];
 
         if (vMapSize(usrIns) && vStartLocation(usrIns))
         {
             initRandom();
             initArray(usrIns, &canvas);
             printCanvas(usrIns, canvas);
-            while (!winStatus)
+            while (!(winStatus || loseStatus))
             {
                 usrKey = readMove();
                 movePlayer(canvas, &usrKey, playerCoords, usrIns);
                 winStatus = vWin(usrIns, playerCoords);
+                loseStatus = (vLose(canvas, playerCoords) || vLose(canvas, goalCoords));
             }
-            printf("You Win!\n");
+            if(winStatus)
+            {
+                printf("You Win!\n");
+            }
+            else
+            {
+                printf("You Lose!\n");
+            }
             free(canvas);
         }
     }

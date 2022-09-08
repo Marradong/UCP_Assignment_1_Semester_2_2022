@@ -4,6 +4,7 @@
 #include "verify.h"
 #include "canvas.h"
 #include "random.h"
+#include "toolbox.h"
 
 char readMove(void)
 {
@@ -17,6 +18,19 @@ char readMove(void)
 
     enableBuffer();
     return move;
+}
+
+void collapseFloor(int* usrIns, char** canvas)
+{
+    int clpseCoords[2];
+    int check = 0;
+    while(!check)
+    {
+        clpseCoords[0] = random(0,usrIns[ROWS] - 1);
+        clpseCoords[1] = random(0,usrIns[ROWS] - 1);
+        check = vFloor(usrIns, clpseCoords, canvas, 1);
+    }
+    placeSym(clpseCoords, canvas, FLOOR_SYM);
 }
 
 void movePlayer(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
@@ -43,15 +57,18 @@ void movePlayer(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
     }
 
     if((playerCoords[0] > usrIns[ROWS] - 1) || (playerCoords[0] < 0) 
-        || (playerCoords[1] > usrIns[COLS] - 1) || (playerCoords[1] < 0)) 
+        || (playerCoords[1] > usrIns[COLS] - 1) || (playerCoords[1] < 0) 
+        || !vFloor(usrIns, playerCoords, canvas, 0)) 
     {
         playerCoords[0] = tempCoords[0];
         playerCoords[1] = tempCoords[1];
     }
     else
     {
-        clearCanvas(usrIns, canvas);
-        placePlayer(playerCoords, canvas);
+        /*remove last player*/
+        placeSym(tempCoords, canvas, SPACE_SYM);
+        placeSym(playerCoords, canvas, PLAYER_SYM);
+        collapseFloor(usrIns, canvas);
         printCanvas(usrIns, canvas);
     }
 }
