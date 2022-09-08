@@ -26,8 +26,8 @@ void collapseFloor(int* usrIns, char** canvas)
     int check = 0;
     while(!check)
     {
-        clpseCoords[0] = random(0,usrIns[ROWS] - 1);
-        clpseCoords[1] = random(0,usrIns[ROWS] - 1);
+        clpseCoords[0] = random(0, (usrIns[ROWS] - 1));
+        clpseCoords[1] = random(0, (usrIns[COLS] - 1));
         check = vFloor(usrIns, clpseCoords, canvas, 1);
     }
     placeSym(clpseCoords, canvas, FLOOR_SYM);

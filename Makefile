@@ -3,6 +3,11 @@ CFLAGS = -Wall -pedantic -ansi
 OBJ = main.o canvas.o toolbox.o verify.o gameplay.o terminal.o random.o
 EXEC = escape
 
+ifdef BORDERLESS
+CFLAGS += -D BORDERLESS
+BORDERLESS : clean $(EXEC)
+endif
+
 $(EXEC) : $(OBJ)
 	$(CC) $(OBJ) -o $(EXEC)
 
