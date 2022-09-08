@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                 #endif
 
                 winStatus = vWin(usrIns, playerCoords);
-                loseStatus = (vLose(canvas, playerCoords) || vLose(canvas, goalCoords));
+                loseStatus = (vLose(canvas, playerCoords, usrIns) || vLose(canvas, goalCoords, usrIns));
             }
             if(winStatus)
             {

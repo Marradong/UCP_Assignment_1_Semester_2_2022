@@ -7,8 +7,8 @@ int vStartLocation(int* usrIns);
 int vArgs(int* numArgs);
 int vMapSize(int* usrIns);
 int vMove(char* move);
-int vWin(int* usrIns, int* playerCoords);
 int vFloor(int* usrIns, int* coords, char** canvas, int checkGoal);
-int vLose(char** canvas, int* coords);
+int vWin(int* usrIns, int* playerCoords);
+int vLose(char** canvas, int* coords, int* usrIns);
 
 #endif

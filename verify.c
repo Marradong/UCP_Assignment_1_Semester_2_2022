@@ -97,7 +97,7 @@ int vWin(int* usrIns, int* playerCoords)
     return won;
 }
 
-int vLose(char** canvas, int* coords)
+int vLose(char** canvas, int* coords, int* usrIns)
 {
     int lose = 0;
     if(((canvas[coords[0]][coords[1]+1] == FLOOR_SYM) || (canvas[coords[0]][coords[1] + 1] == BORDER_SYM)) 
@@ -106,6 +106,16 @@ int vLose(char** canvas, int* coords)
         && ((canvas[coords[0]+1][coords[1]+2] == FLOOR_SYM) || (canvas[coords[0] + 1][coords[1] + 2] == BORDER_SYM)))
     {
         lose = 1;
+
+        #ifdef BORDERLESS
+        if((coords[0] == 0 && canvas[(usrIns[ROWS]-1)][coords[1]+1] != FLOOR_SYM) 
+            || (coords[1] == 0 && canvas[coords[0]+1][(usrIns[COLS]-1)] != FLOOR_SYM)
+            || (coords[0] == (usrIns[ROWS]-1) && canvas[1][coords[1]+1] != FLOOR_SYM)
+            || (coords[1] == (usrIns[COLS]-1) && canvas[coords[0]+1][1] != FLOOR_SYM))
+        {
+            lose = 0;
+        }
+        #endif
     }
     return lose;
 }
