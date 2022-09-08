@@ -3,9 +3,10 @@
 
 #define MAP_MINIMUM 5
 
-int vStartLocation(int usrIns[]);
-int vArgs(int numArgs);
-int vMapSize(int usrIns[]);
+int vStartLocation(int* usrIns);
+int vArgs(int* numArgs);
+int vMapSize(int* usrIns);
 int vMove(char* move);
+int vWin(int* usrIns, int* playerCoords);
 
 #endif

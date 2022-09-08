@@ -3,6 +3,7 @@
 #include "terminal.h"
 #include "verify.h"
 #include "canvas.h"
+#include "random.h"
 
 char readMove(void)
 {
@@ -18,8 +19,11 @@ char readMove(void)
     return move;
 }
 
-void movePlayer(char** canvas, char* usrKey, int playerCoords[], int usrIns[])
+void movePlayer(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
 {
+    int tempCoords[2];
+    tempCoords[0] = playerCoords[0];
+    tempCoords[1] = playerCoords[1];
 
     if((*usrKey) == UP_KEY)
     {
@@ -38,23 +42,16 @@ void movePlayer(char** canvas, char* usrKey, int playerCoords[], int usrIns[])
         playerCoords[1] = playerCoords[1] + 1;
     }
 
-    if(playerCoords[0] > usrIns[ROWS])
+    if((playerCoords[0] > usrIns[ROWS] - 1) || (playerCoords[0] < 0) 
+        || (playerCoords[1] > usrIns[COLS] - 1) || (playerCoords[1] < 0)) 
     {
-        playerCoords[0] = usrIns[ROWS];
+        playerCoords[0] = tempCoords[0];
+        playerCoords[1] = tempCoords[1];
     }
-    if(playerCoords[0] < 0)
+    else
     {
-        playerCoords[0] = 0;
+        clearCanvas(usrIns, canvas);
+        placePlayer(playerCoords, canvas);
+        printCanvas(usrIns, canvas);
     }
-    if(playerCoords[1] > usrIns[COLS])
-    {
-        playerCoords[1] = usrIns[COLS];
-    }
-    if(playerCoords[1] < 0)
-    {
-        playerCoords[1] = 0;
-    }
-
-    clearCanvas(usrIns, canvas);
-    placePlayer(playerCoords, canvas);
 }

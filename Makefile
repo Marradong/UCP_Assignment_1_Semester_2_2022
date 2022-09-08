@@ -1,12 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -pedantic -ansi
-OBJ = main.o canvas.o toolbox.o verify.o gameplay.o terminal.o
+OBJ = main.o canvas.o toolbox.o verify.o gameplay.o terminal.o random.o
 EXEC = escape
 
 $(EXEC) : $(OBJ)
 	$(CC) $(OBJ) -o $(EXEC)
 
-main.o : main.c canvas.h toolbox.h verify.h gameplay.h
+main.o : main.c canvas.h toolbox.h verify.h gameplay.h random.h
 	$(CC) -c main.c $(CFLAGS)
 
 canvas.o : canvas.c canvas.h
@@ -23,6 +23,9 @@ gameplay.o : gameplay.c gameplay.h verify.h terminal.h canvas.h
 
 terminal.o : terminal.c terminal.h
 	$(CC) -c terminal.c $(CFLAGS)
+
+random.o : random.c random.h
+	$(CC) -c random.c $(CFLAGS)
 
 clean :
 	rm -f $(EXEC) $(OBJ)

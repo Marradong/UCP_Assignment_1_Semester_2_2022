@@ -4,7 +4,7 @@
 #include "gameplay.h"
 #include "canvas.h"
 
-int vMapSize(int usrIns[])
+int vMapSize(int* usrIns)
 {
     int verified = 1;
     /* Check within bounds else end program */
@@ -19,12 +19,22 @@ int vMapSize(int usrIns[])
     return verified;
 }
 
-int vArgs(int numArgs)
+int vWin(int* usrIns, int* playerCoords)
 {
-    int verified = 0;
-    if(numArgs != 7)
+    int won = 0;
+    if(playerCoords[0] == usrIns[GOAL_ROW] && playerCoords[1] == usrIns[GOAL_COL])
     {
-        verified = 1;
+        won = 1;
+    }
+    return won;
+}
+
+int vArgs(int* numArgs)
+{
+    int verified = 1;
+    if((*numArgs) != 7)
+    {
+        verified = 0;
         system("clear");
         printf("Invalid number of arguements please enter in the format below\n");
         printf("./escape <row_map> <col_map> <row_player> <col_player> <row_goal> <col_goal>\n");
@@ -32,7 +42,23 @@ int vArgs(int numArgs)
     return verified;
 }
 
-int vStartLocation(int usrIns[])
+int vFloor(int* usrIns, int* playerCoords, char** canvas)
+{
+    int i, j;
+    int verified = 1;
+    for (i=0;i<usrIns[ROWS];i++)
+    {
+        for(j=0;j<usrIns[COLS];j++)
+        {
+            if(canvas[i][j] == FLOOR_SYM && i == playerCoords[0] && j == playerCoords[1])
+            {
+                verified = 0;
+            }
+        }
+    }
+}
+
+int vStartLocation(int* usrIns)
 {
     int verified = 1;
 

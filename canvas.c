@@ -13,7 +13,7 @@ void initArray(int* usrIns, char*** canvas)
     placePlayer(playerCoords, *canvas);
 }
 
-void placePlayer(int coords[], char** canvas)
+void placePlayer(int* coords, char** canvas)
 {
     canvas[coords[0] + 1][coords[1] + 1] = PLAYER_SYM;
 }
