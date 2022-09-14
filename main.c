@@ -26,21 +26,21 @@ int main(int argc, char *argv[])
         {
             initRandom();
             initArray(usrIns, &canvas);
-            printCanvas(usrIns, canvas);
+            printCanvas(usrIns, &canvas);
             while (!(winStatus || loseStatus))
             {
                 usrKey = readMove();
 
                 #ifndef BORDERLESS
-                    movePlayer(canvas, &usrKey, playerCoords, usrIns);
+                    movePlayer(&canvas, &usrKey, playerCoords, usrIns);
                 #endif
 
                 #ifdef BORDERLESS
-                    moveBorderless(canvas, &usrKey, playerCoords, usrIns);
+                    moveBorderless(&canvas, &usrKey, playerCoords, usrIns);
                 #endif
 
                 winStatus = vWin(usrIns, playerCoords);
-                loseStatus = (vLose(canvas, playerCoords, usrIns) || vLose(canvas, goalCoords, usrIns));
+                loseStatus = (vLose(&canvas, playerCoords, usrIns) || vLose(&canvas, goalCoords, usrIns));
             }
             if(winStatus)
             {
@@ -50,9 +50,8 @@ int main(int argc, char *argv[])
             {
                 printf("You Lose!\n");
             }
-            free(canvas);
+            freeCanvas(usrIns, &canvas);
         }
     }
-
     return 0;
 }

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -pedantic -ansi
+CFLAGS = -Wall -pedantic -ansi -g
 OBJ = main.o canvas.o toolbox.o verify.o gameplay.o terminal.o random.o
 EXEC = escape
 

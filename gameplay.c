@@ -20,7 +20,7 @@ char readMove(void)
     return move;
 }
 
-void collapseFloor(int* usrIns, char** canvas)
+void collapseFloor(int* usrIns, char*** canvas)
 {
     int clpseCoords[2];
     int check = 0;
@@ -33,7 +33,7 @@ void collapseFloor(int* usrIns, char** canvas)
     placeSym(clpseCoords, canvas, FLOOR_SYM);
 }
 
-void movePlayer(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
+void movePlayer(char*** canvas, char* usrKey, int* playerCoords, int* usrIns)
 {
     int tempCoords[2];
     tempCoords[0] = playerCoords[0];
@@ -73,7 +73,7 @@ void movePlayer(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
     }
 }
 
-void moveBorderless(char** canvas, char* usrKey, int* playerCoords, int* usrIns)
+void moveBorderless(char*** canvas, char* usrKey, int* playerCoords, int* usrIns)
 {
     int tempCoords[2];
     tempCoords[0] = playerCoords[0];
