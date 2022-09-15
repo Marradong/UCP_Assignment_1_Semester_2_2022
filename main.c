@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     {
         int usrIns[6], playerCoords[2], goalCoords[2];
 
+        /* convert command line arguments to integers */
         charToInt(argv, usrIns, &argc);
 
         playerCoords[ROWS] = usrIns[PLAYER_ROW];
@@ -36,9 +37,7 @@ int main(int argc, char *argv[])
 
                 #ifndef BORDERLESS
                     movePlayer(&canvas, &usrKey, playerCoords, usrIns);
-                #endif
-
-                #ifdef BORDERLESS
+                #else
                     moveBorderless(&canvas, &usrKey, playerCoords, usrIns);
                 #endif
 
