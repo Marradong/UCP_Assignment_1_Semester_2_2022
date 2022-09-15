@@ -105,27 +105,32 @@ int vWin(int* usrIns, int* playerCoords)
 int vLose(char*** canvas, int* coords, int* usrIns)
 {
     int lose = FALSE;
-    if((((*canvas)[coords[0]][coords[1]+1] == FLOOR_SYM) || ((*canvas)[coords[0]][coords[1] + 1] == BORDER_SYM)) 
-        && (((*canvas)[coords[0]+2][coords[1]+1] == FLOOR_SYM) || ((*canvas)[coords[0] + 2][coords[1] + 1] == BORDER_SYM))
-        && (((*canvas)[coords[0]+1][coords[1]] == FLOOR_SYM) || ((*canvas)[coords[0] + 1][coords[1]] == BORDER_SYM))
-        && (((*canvas)[coords[0]+1][coords[1]+2] == FLOOR_SYM) || ((*canvas)[coords[0] + 1][coords[1] + 2] == BORDER_SYM)))
-    {
-        lose = TRUE;
 
-        #ifdef BORDERLESS
-
-        int isTopRow = (coords[0] == 0 && (*canvas)[(usrIns[ROWS]-1)][coords[1]+1] != FLOOR_SYM);
-        int isBotRow = (coords[0] == (usrIns[ROWS]-1) && (*canvas)[1][coords[1]+1] != FLOOR_SYM);
-        int isLeftCol = (coords[1] == 0 && (*canvas)[coords[0]+1][(usrIns[COLS]-1)] != FLOOR_SYM);
-        int isRightCol = (coords[1] == (usrIns[COLS]-1) && (*canvas)[coords[0]+1][1] != FLOOR_SYM);
-        
-        if((isTopRow && isLeftCol) || (isTopRow && isRightCol)
-            || (isBotRow && isLeftCol) || (isBotRow && isRightCol))
+    int sRow = coords[0] + 1;
+    int sCol = coords[1] + 1;
+    int chkUp, chkDown, chkLeft, chkRight;
+    
+    #ifndef BORDERLESS
+        chkUp = ((*canvas)[sRow-1][sCol] == FLOOR_SYM) || ((*canvas)[sRow-1][sCol] == BORDER_SYM);
+        chkDown = ((*canvas)[sRow+1][sCol] == FLOOR_SYM) || ((*canvas)[sRow+1][sCol] == BORDER_SYM);
+        chkLeft = ((*canvas)[sRow][sCol-1] == FLOOR_SYM) || ((*canvas)[sRow][sCol-1] == BORDER_SYM);
+        chkRight = ((*canvas)[sRow][sCol+1] == FLOOR_SYM) || ((*canvas)[sRow][sCol+1] == BORDER_SYM);
+        if(chkLeft && chkRight && chkUp && chkDown)
         {
-            lose = FALSE;
+            lose = TRUE;
         }
+    #else 
+        int maxRow = usrIns[ROWS];
+        int maxCol = usrIns[COLS]; 
+        chkUp = ((*canvas)[sRow-1][sCol] == FLOOR_SYM) || (((*canvas)[sRow-1][sCol] == BORDER_SYM) && ((*canvas)[maxRow][sCol] == FLOOR_SYM));
+        chkDown = ((*canvas)[sRow+1][sCol] == FLOOR_SYM) || (((*canvas)[sRow+1][sCol] == BORDER_SYM) && ((*canvas)[1][sCol] == FLOOR_SYM));
+        chkLeft = ((*canvas)[sRow][sCol-1] == FLOOR_SYM) || (((*canvas)[sRow][sCol-1] == BORDER_SYM) && ((*canvas)[sRow][maxCol] == FLOOR_SYM));
+        chkRight = ((*canvas)[sRow][sCol+1] == FLOOR_SYM) || (((*canvas)[sRow][sCol+1] == BORDER_SYM) && ((*canvas)[sRow][1] == FLOOR_SYM));
+        if(chkLeft && chkRight && chkUp && chkDown)
+        {
+            lose = TRUE;
+        }
+    #endif
 
-        #endif
-    }
     return lose;
 }

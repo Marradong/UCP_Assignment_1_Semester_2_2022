@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
         {
             initRandom();
             initArray(usrIns, &canvas);
-            printCanvas(usrIns, &canvas);
             while (!(winStatus || loseStatus))
             {
                 usrKey = readMove();

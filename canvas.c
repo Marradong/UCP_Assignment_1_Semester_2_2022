@@ -3,6 +3,16 @@
 #include <string.h>
 #include "canvas.h"
 
+/**************************************************************************************************/
+/* Canvas Initialisation, Display and Termination Methods                   	      		  	  */
+/**************************************************************************************************/
+
+/**
+ * @brief Initialises and prints the canvas along with player and goal.
+ * 
+ * @param usrIns the command line inputs of the user (int [6]).
+ * @param canvas pointer to the game canvas (char***).
+ */
 void initArray(int* usrIns, char*** canvas)
 {
     int playerCoords[2];
@@ -11,8 +21,16 @@ void initArray(int* usrIns, char*** canvas)
     createCanvas(usrIns, canvas);
     clearCanvas(usrIns, canvas);   
     placeSym(playerCoords, canvas, PLAYER_SYM);
+    printCanvas(usrIns, canvas);
 }
 
+/**
+ * @brief Places a symbol (player, goal, floor) on the canvas.
+ * 
+ * @param coords the coordinates of the symbol (int [2]).
+ * @param canvas pointer to the game canvas (char***).
+ * @param sym the symbol to place on the canvas (char).
+ */
 void placeSym(int* coords, char*** canvas, char sym)
 {
     (*canvas)[coords[0] + 1][coords[1] + 1] = sym;
