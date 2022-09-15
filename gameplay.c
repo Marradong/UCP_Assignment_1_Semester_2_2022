@@ -6,24 +6,37 @@
 #include "random.h"
 #include "toolbox.h"
 
-char readMove(void)
+/**
+ * @brief Reads keyboard input immediately.
+ * 
+ * @param usrKey, the keyboard charater associated with the players next move.
+ */
+void readMove(char* usrKey)
 {
-    char move;
+    /* disables terminal buffer so keyboard input can be read immediately without the return key */
     disableBuffer();
 
-    while(!vMove(&move))
+    /* continually requests keyboard input until a verified character move is entered */
+    while(!vMove(usrKey))
     {
-        scanf(" %c", &move);
+        scanf(" %c", usrKey);
     }  
 
     enableBuffer();
-    return move;
 }
 
+/**
+ * @brief Randomly places a collapsed floor character on the canvas.
+ * 
+ * @param usrIns the command line inputs of the user (int [6]).
+ * @param canvas pointer to the game canvas (char***).
+ */
 void collapseFloor(int* usrIns, char*** canvas)
 {
     int clpseCoords[2];
     int check = 0;
+
+    /*  */
     while(!check)
     {
         clpseCoords[0] = random(0, (usrIns[ROWS] - 1));
@@ -71,6 +84,7 @@ void movePlayer(char*** canvas, char* usrKey, int* playerCoords, int* usrIns)
         collapseFloor(usrIns, canvas);
         printCanvas(usrIns, canvas);
     }
+    (*usrKey) = ' ';
 }
 
 void moveBorderless(char*** canvas, char* usrKey, int* playerCoords, int* usrIns)

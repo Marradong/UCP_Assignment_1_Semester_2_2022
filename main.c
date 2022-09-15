@@ -8,27 +8,31 @@
 
 int main(int argc, char *argv[])
 {
-    int usrIns[6], playerCoords[2], goalCoords[2];
-    int winStatus = 0;
-    int loseStatus = 0;
-    char **canvas;
-    char usrKey;
-
     if (vArgs(&argc))
     {
+        int usrIns[6], playerCoords[2], goalCoords[2];
+
         charToInt(argv, usrIns, &argc);
-        playerCoords[0] = usrIns[PLAYER_ROW];
-        playerCoords[1] = usrIns[PLAYER_COL];
-        goalCoords[0] = usrIns[GOAL_ROW];
-        goalCoords[1] = usrIns[GOAL_COL];
+
+        playerCoords[ROWS] = usrIns[PLAYER_ROW];
+        playerCoords[COLS] = usrIns[PLAYER_COL];
+
+        goalCoords[ROWS] = usrIns[GOAL_ROW];
+        goalCoords[COLS] = usrIns[GOAL_COL];
 
         if (vMapSize(usrIns) && vStartLocation(usrIns))
         {
+            int winStatus = FALSE;
+            int loseStatus = FALSE;
+            char **canvas = NULL;
+            char usrKey = ' ';
+
             initRandom();
-            initArray(usrIns, &canvas);
+            initCanvas(usrIns, playerCoords, &canvas);
+
             while (!(winStatus || loseStatus))
             {
-                usrKey = readMove();
+                readMove(&usrKey);
 
                 #ifndef BORDERLESS
                     movePlayer(&canvas, &usrKey, playerCoords, usrIns);

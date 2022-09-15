@@ -6,7 +6,7 @@
 #define LEFT_KEY 'a'
 #define RIGHT_KEY 'd'
 
-char readMove(void);
+void readMove(char* usrKey);
 void movePlayer(char*** canvas, char* usrKey, int* playerCoords, int* usrIns);
 void collapseFloor(int* usrIns, char*** canvas);
 void moveBorderless(char*** canvas, char* usrKey, int* playerCoords, int* usrIns);

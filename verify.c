@@ -23,7 +23,7 @@ int vMapSize(int* usrIns)
 {
     int verified = TRUE;
     /* Check within bounds else end program */
-    if((usrIns[ROWS] < MAP_MINIMUM) || (usrIns[COLS] < MAP_MINIMUM))
+    if((usrIns[ROWS] < MAP_SIZE_MINIMUM) || (usrIns[COLS] < MAP_SIZE_MINIMUM))
     {
         verified = FALSE;
         system("clear");
