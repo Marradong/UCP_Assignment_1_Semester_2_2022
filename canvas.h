@@ -11,6 +11,7 @@
 #define GOAL_ROW 4
 #define GOAL_COL 5
 
+/* symbols used for the game canvas */
 #define BORDER_SYM '*'
 #define SPACE_SYM ' '
 #define PLAYER_SYM 'P'

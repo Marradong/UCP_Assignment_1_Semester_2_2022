@@ -5,6 +5,10 @@
 #include "canvas.h"
 #include "toolbox.h"
 
+/**************************************************************************************************/
+/* Game Validation Methods     	                	                                         	  */
+/**************************************************************************************************/
+
 /**
  * @brief Verifies that the correct number of command line arguements has been entered.
  * 

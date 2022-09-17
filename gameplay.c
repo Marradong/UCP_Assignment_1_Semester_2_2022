@@ -6,6 +6,10 @@
 #include "random.h"
 #include "toolbox.h"
 
+/**************************************************************************************************/
+/* Player Movement and Collapsed Floor Generation Methods                   	      		  	  */
+/**************************************************************************************************/
+
 /**
  * @brief Reads keyboard input immediately.
  * 
@@ -85,8 +89,8 @@ void movePlayer(char*** canvas, char* usrKey, int* playerCoords, int* usrIns)
         break;
     }
 
-    /* check if the new player coordinates lie outside the canvas border or are equal to a collapsed 
-    floor */
+    /* check if the new player coordinates lie outside the canvas border or are equal to a 
+    collapsed floor */
     /* -1 accounts for C indexing starting at 0 */
     if((playerCoords[ROWS] > usrIns[ROWS] - 1) 
         || (playerCoords[ROWS] < 0) 

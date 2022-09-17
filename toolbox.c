@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "toolbox.h"
 
+/**************************************************************************************************/
+/* Utilities                           	      		                                         	  */
+/**************************************************************************************************/
+
 /**
  * @brief Converts an array of characters into an array of integers (skips first character)
  * 
